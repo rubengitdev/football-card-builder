@@ -1,5 +1,31 @@
 import './App.css';
 
+interface PlayerData {
+    name: string;
+    overallRating: number;
+    position: string;
+    club: string;
+    imageUrl: string;
+    pac: number;
+    sho: number;
+    pas: number;
+    dri: number;
+    def: number;
+    phy: number;
+}
+
+const getPlayerTier = (rating: number) => {
+    if (rating >= 92) {
+        return 'elite';
+    } else if (rating >= 85) {
+        return 'gold';
+    } else if (rating >= 75) {
+        return 'silver';
+    } else {
+        return 'bronze';
+    }
+};
+
 const PlayerCard = () => {
     return (
         <div className="root">
@@ -28,16 +54,31 @@ const PlayerCard = () => {
                     <div className="card-stats">
                         <div className="stat-col">
                             <div className="stat-row">
-                                <span className="stat-value"></span>
-                                <span className="stat-label"></span>
+                                <span className="stat-value">97</span>
+                                <span className="stat-label">PAC</span>
                             </div>
                             <div className="stat-row">
-                                <span className="stat-value"></span>
-                                <span className="stat-label"></span>
+                                <span className="stat-value">98</span>
+                                <span className="stat-label">SHO</span>
                             </div>
                             <div className="stat-row">
-                                <span className="stat-value"></span>
-                                <span className="stat-label"></span>
+                                <span className="stat-value">83</span>
+                                <span className="stat-label">PAS</span>
+                            </div>
+                        </div>
+                        <div className="stat-divider"></div>
+                        <div className="stat-col">
+                            <div className="stat-row">
+                                <span className="stat-value">99</span>
+                                <span className="stat-label">DRI</span>
+                            </div>
+                            <div className="stat-row">
+                                <span className="stat-value">41</span>
+                                <span className="stat-label">DEF</span>
+                            </div>
+                            <div className="stat-row">
+                                <span className="stat-value">75</span>
+                                <span className="stat-label">PHY</span>
                             </div>
                         </div>
                     </div>
