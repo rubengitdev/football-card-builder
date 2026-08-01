@@ -26,18 +26,28 @@ const getPlayerTier = (rating: number) => {
     }
 };
 
-const PlayerCard = () => {
+const PlayerCard = ({ player }: { player: PlayerData }) => {
     return (
         <div className="root">
-            <div className="card-wrapper tier-gold">
+            <div
+                className={`card-wrapper tier-${getPlayerTier(player.overallRating)}`}
+            >
                 <div className="card">
                     <div className="card-header">
                         <div>
-                            <div className="card-rating">98</div>
-                            <div className="card-position">ST</div>
+                            <div className="card-rating">
+                                ${player.overallRating}
+                            </div>
+                            <div className="card-position">
+                                ${player.position}
+                            </div>
                         </div>
                         <div className="card-header-right">
-                            <div className="card-tier-badge">GOLD</div>
+                            <div className="card-tier-badge">
+                                {getPlayerTier(
+                                    player.overallRating,
+                                ).toUpperCase()}
+                            </div>
                             <div className="card-club">Santos FC</div>
                         </div>
                     </div>
@@ -89,7 +99,22 @@ const PlayerCard = () => {
 };
 
 const FootballPlayerCard = () => {
-    return <PlayerCard />;
+    const peleData: PlayerData = {
+        name: 'PELE',
+        overallRating: 98,
+        position: 'ST',
+        club: 'Santos FC',
+        imageUrl:
+            'https://cdn.freecodecamp.org/curriculum/typescript/tsx-workshop/pele.jpg',
+        pac: 97,
+        sho: 98,
+        pas: 83,
+        dri: 99,
+        def: 41,
+        phy: 75,
+    };
+
+    return <PlayerCard player={peleData} />;
 };
 
 export default FootballPlayerCard;
