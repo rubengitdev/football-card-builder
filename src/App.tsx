@@ -1,5 +1,4 @@
 import './App.css';
-import { useState } from 'react';
 import { useState, useEffect } from 'react';
 
 const POSITIONS = [
@@ -21,7 +20,6 @@ type Position = (typeof POSITIONS)[number];
 interface PlayerData {
     name: string;
     overallRating: number;
-    position: string;
     position: Position;
     club: string;
     imageUrl: string;
@@ -32,6 +30,8 @@ interface PlayerData {
     def: number;
     phy: number;
 }
+
+const STORAGE_KEY = 'football_player_card';
 
 const getPlayerTier = (rating: number) => {
     if (rating >= 92) {
@@ -132,8 +132,29 @@ const defaultPlayer: PlayerData = {
     phy: 75,
 };
 
+const loadPlayer = (): PlayerData => {
+    try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+            return { ...defaultPlayer, ...JSON.parse(saved) };
+        }
+    } catch (error) {
+        console.log('Failed to load player data, using defaults: ', error);
+    }
+
+    return defaultPlayer;
+};
+
 const FootballPlayerCard = () => {
-    const [player, setPlayer] = useState<PlayerData>(defaultPlayer);
+    const [player, setPlayer] = useState<PlayerData>(loadPlayer());
+
+    useEffect(() => {
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(player));
+        } catch (error) {
+            console.log('Failed to save player data:', error);
+        }
+    }, [player]);
 
     return (
         <div className="page">
@@ -149,9 +170,9 @@ const FootballPlayerCard = () => {
             <main className="main">
                 <div className="layout">
                     <div className="form-panel">
-                        <div className="player-info">
                         <div>
                             <p className="form-section-title">Player Info</p>
+
                             {/* Name Input */}
                             <div className="form-group">
                                 <label htmlFor="name" className="label">
@@ -176,13 +197,10 @@ const FootballPlayerCard = () => {
                                     <label htmlFor="position" className="label">
                                         Position
                                     </label>
-                                    <input
-                                        type="text"
                                     <select
                                         value={player.position}
                                         id="position"
                                         className="input"
-                                    />
                                         onChange={(e) =>
                                             setPlayer({
                                                 ...player,
