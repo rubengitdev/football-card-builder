@@ -22,6 +22,7 @@ interface PlayerData {
     name: string;
     overallRating: number;
     position: string;
+    position: Position;
     club: string;
     imageUrl: string;
     pac: number;
