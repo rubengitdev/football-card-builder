@@ -37,9 +37,11 @@ const PlayerCard = ({ player }: { player: PlayerData }) => {
                         <div>
                             <div className="card-rating">
                                 ${player.overallRating}
+                                {player.overallRating}
                             </div>
                             <div className="card-position">
                                 ${player.position}
+                                {player.position}
                             </div>
                         </div>
                         <div className="card-header-right">
@@ -49,30 +51,37 @@ const PlayerCard = ({ player }: { player: PlayerData }) => {
                                 ).toUpperCase()}
                             </div>
                             <div className="card-club">Santos FC</div>
+                            <div className="card-club">{player.club}</div>
                         </div>
                     </div>
                     <div className="card-image-wrap">
                         <img
                             src="https://cdn.freecodecamp.org/curriculum/typescript/tsx-workshop/pele.jpg"
                             alt="Edson Arantes do Nascimento (Pele) headshot"
+                            src={player.imageUrl}
+                            alt={`${player.name} headshot`}
                             className="card-image"
                         />
                     </div>
                     <div className="card-name-strip">
                         <span className="card-name">PELE</span>
+                        <span className="card-name">{player.name}</span>
                     </div>
                     <div className="card-stats">
                         <div className="stat-col">
                             <div className="stat-row">
                                 <span className="stat-value">97</span>
+                                <span className="stat-value">{player.pac}</span>
                                 <span className="stat-label">PAC</span>
                             </div>
                             <div className="stat-row">
                                 <span className="stat-value">98</span>
+                                <span className="stat-value">{player.sho}</span>
                                 <span className="stat-label">SHO</span>
                             </div>
                             <div className="stat-row">
                                 <span className="stat-value">83</span>
+                                <span className="stat-value">{player.pas}</span>
                                 <span className="stat-label">PAS</span>
                             </div>
                         </div>
@@ -80,14 +89,17 @@ const PlayerCard = ({ player }: { player: PlayerData }) => {
                         <div className="stat-col">
                             <div className="stat-row">
                                 <span className="stat-value">99</span>
+                                <span className="stat-value">{player.dri}</span>
                                 <span className="stat-label">DRI</span>
                             </div>
                             <div className="stat-row">
                                 <span className="stat-value">41</span>
+                                <span className="stat-value">{player.def}</span>
                                 <span className="stat-label">DEF</span>
                             </div>
                             <div className="stat-row">
                                 <span className="stat-value">75</span>
+                                <span className="stat-value">{player.phy}</span>
                                 <span className="stat-label">PHY</span>
                             </div>
                         </div>
